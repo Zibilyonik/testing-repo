@@ -1,3 +1,7 @@
+function storageSetter(arr) {
+  localStorage.clear();
+  localStorage.setItem('todoArray', JSON.stringify(arr));
+}
 function addTodo(arr) {
   const textGetter = document.getElementById('TodoDesc');
   arr.push({
@@ -19,22 +23,19 @@ function deleteTodo(arr, index) {
     arr[i].index = i + 1;
   }
   cont.remove();
-  localStorage.clear();
-  localStorage.setItem('todoArray', JSON.stringify(arr));
+  storageSetter(arr);
 }
 
 function editTodo(arr, index) {
   const obj = document.getElementById(`${index}-text`);
   arr[index - 1].description = obj.innerText;
-  localStorage.clear();
-  localStorage.setItem('todoArray', JSON.stringify(arr));
+  storageSetter(arr);
 }
 
 function deleteMarked(arr) {
   const bonk = arr.filter((item) => item.completed === false);
   arr = [...bonk];
-  localStorage.clear();
-  localStorage.setItem('todoArray', JSON.stringify(arr));
+  storageSetter(arr);
 }
 export {
   addTodo, deleteTodo, editTodo, deleteMarked,
